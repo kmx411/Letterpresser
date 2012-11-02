@@ -153,13 +153,15 @@ int main() {
 
   ifstream myfile( "letterpress_dictionary.txt" );
   while( myfile >> item ){
-    cout << item << endl;
     checkFunction( *dictionary, "+", item );
   }
   myfile.close();
 
   while( cin >> in ){
-    permute( in, *dictionary );
+
+    for( int i = 0; i <= in.size(); i++ ){
+      permute( in.substr(0,i), *dictionary );
+    }
   }
 
   deletePointers( dictionary );
