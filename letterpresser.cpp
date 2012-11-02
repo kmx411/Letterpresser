@@ -68,6 +68,56 @@ void find(  TrieNode &node, string word, string wordSoFar ) {
     }
 }
 
+struct State
+{
+    State (std::string topermute_, int place_, int nextchar_, State* next_ = 0)
+        : topermute (topermute_)
+        , place (place_)
+        , nextchar (nextchar_)
+        , next (next_)
+    {
+    }
+
+    std::string topermute;
+    int place;
+    int nextchar;
+
+    State* next;
+};
+
+std::string swtch (std::string topermute, int x, int y)
+{
+    std::string newstring = topermute;
+    newstring[x] = newstring[y];
+    newstring[y] = topermute[x]; //avoids temp variable
+
+    return newstring;
+}
+
+void permute (std::string topermute,TrieNode &dictionary, int place = 0 )
+{
+    // Linked list stack.
+    State* top = new State (topermute, place, place);
+
+    while (top != 0)
+    {
+        State* pop = top;
+        top = pop->next;
+
+        if (pop->place == pop->topermute.length () - 1)
+        {
+            find( dictionary, pop->topermute, "" );
+        }
+
+        for (int i = pop->place; i < pop->topermute.length (); ++i)
+        {
+            top = new State (swtch (pop->topermute, pop->place, i), pop->place + 1, i, top);
+        }
+
+        delete pop;
+    }
+}
+
 void checkFunction( TrieNode &dictionary, string ch, string word ) {
     string blank = "";
 
@@ -101,26 +151,15 @@ int main() {
   string oper;
   string item;
 
-  //ifstream myfile( "letterpress_by_length.txt" );
-  //while( myfile >> item ){
-    //checkFunction( *dictionary, "+", item );
-  //}
-  //myfile.close();
+  ifstream myfile( "letterpress_dictionary.txt" );
+  while( myfile >> item ){
+    cout << item << endl;
+    checkFunction( *dictionary, "+", item );
+  }
+  myfile.close();
 
   while( cin >> in ){
-    cin >> word;
-    string line;
-
-
-    if( in == "include" ){
-      ifstream myfile( word.c_str() );
-      while( myfile >> oper >> item ){
-        checkFunction( *dictionary, oper, item );
-      }
-      myfile.close();
-    }
-
-    else  checkFunction( *dictionary, in, word );
+    permute( in, *dictionary );
   }
 
   deletePointers( dictionary );
