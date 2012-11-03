@@ -271417,14 +271417,26 @@ removeRepeatLetters = (count) ->
     if nonDupe
       results.push word
 
+launchIt = (input) ->
+  fillLetters input
+  check word for word in dictionary
+  removeRepeatLetters createCount( input )
+  console.log results
+  for word in results
+    $('#fill1').append "<h4>#{word}</h4>"
 
 
 
 $(document).ready ->
-  input = 'qnblpupfrctymxiwpebstpztx'
-  fillLetters input
-  check word for word in dictionary
-  removeRepeatLetters createCount( input )
-  console.log( word ) for word in results
+  $('.btn').click ->
+    $('#fill1').html "<h1>WHHHYYYY</h1> "
+    $('#fill2').html('')
+    $('#fill3').html('')
+    nonLetters = []
+    resultsWithDupe = []
+    results = []
+    input = $('#appendedInputButton').val()
+    launchIt input
+
 
 
