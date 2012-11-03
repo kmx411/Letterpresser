@@ -271379,6 +271379,8 @@ aa".split(' ')
 
 alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 nonLetters = []
+resultWithDupe = []
+results = []
 
 
 fillLetters = (letterSet) ->
@@ -271392,10 +271394,37 @@ check = (word) ->
         result = false
 
   if result == true
-    console.log word
+    resultWithDupe.push word
+
+createCount = (letterSet) ->
+  letters = letterSet.split('')
+  count = {}
+  for letter in letters
+    if( count[letter] )
+      count[letter]++
+    else count[letter] = 1
+
+  count
+
+removeRepeatLetters = (count) ->
+  for word in resultWithDupe
+    nonDupe = true
+    currentCount = createCount( word )
+    for letter in word.split('')
+      if currentCount[letter] > count[letter]
+        nonDupe = false
+
+    if nonDupe
+      results.push word
+
+
+
 
 $(document).ready ->
-  fillLetters 'hsaeablhyyxkynwogevatpu'
+  input = 'qnblpupfrctymxiwpebstpztx'
+  fillLetters input
   check word for word in dictionary
+  removeRepeatLetters createCount( input )
+  console.log( word ) for word in results
 
 
