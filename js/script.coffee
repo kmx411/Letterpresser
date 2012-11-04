@@ -72,5 +72,6 @@ $(document).ready ->
     $('#fill2').html ''
     $('#fill3').html ''
 
-    input = $('#appendedInputButton').val()
+    input = $('#appendedInputButton').val().toLowerCase().replace(/\ /g,"")
+    console.log input
     launchIt input
