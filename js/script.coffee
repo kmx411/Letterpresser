@@ -222288,7 +222288,7 @@ murages
 coronet 
 resumed 
 muraled 
-results 
+window.results 
 coroner 
 cedilla 
 coronel 
@@ -271377,24 +271377,25 @@ si
 so 
 aa".split(' ')
 
-alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-nonLetters = []
-resultWithDupe = []
-results = []
+window.alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
+window.nonLetters = []
+window.resultWithDupe = []
+window.results = []
 
 fillLetters = (letterSet) ->
-  nonLetters = _.difference( alphabet, letterSet.split('') )
+  window.nonLetters = _.difference( window.alphabet, letterSet.split('') )
+  check word for word in dictionary
 
 check = (word) ->
   result = true
   for letter in word.split('')
-    for nonLetter in nonLetters
+    for nonLetter in window.nonLetters
       if letter == nonLetter
         result = false
 
   if result == true
-    resultWithDupe.push word
+    window.resultWithDupe.push word
 
 createCount = (letterSet) ->
   letters = letterSet.split('')
@@ -271407,7 +271408,7 @@ createCount = (letterSet) ->
   count
 
 removeRepeatLetters = (count) ->
-  for word in resultWithDupe
+  for word in window.resultWithDupe
     nonDupe = true
     currentCount = createCount( word )
     for letter in word.split('')
@@ -271415,28 +271416,32 @@ removeRepeatLetters = (count) ->
         nonDupe = false
 
     if nonDupe
-      results.push word
+      window.results.push word
 
-launchIt = (input) ->
-  fillLetters input
-  check word for word in dictionary
-  removeRepeatLetters createCount( input )
-  console.log results
-  for word in results
+clearGlobals = (callback) ->
+  window.nonLetters.length = 0
+  window.resultWithDupe.length = 0
+  window.results.length = 0
+  callback()
+
+fillDOM = ->
+  resultCount = window.results.length()
+
+  for word in window.results
     $('#fill1').append "<h4>#{word}</h4>"
 
+launchIt = (input) ->
+  clearGlobals ->
+    fillLetters input
+    removeRepeatLetters createCount( input )
+    fillDOM()
 
 
 $(document).ready ->
   $('.btn').click ->
-    $('#fill1').html "<h1>WHHHYYYY</h1> "
-    $('#fill2').html('')
-    $('#fill3').html('')
-    nonLetters = []
-    resultsWithDupe = []
-    results = []
+    $('#fill1').html ''
+    $('#fill2').html ''
+    $('#fill3').html ''
+
     input = $('#appendedInputButton').val()
     launchIt input
-
-
-
