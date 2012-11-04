@@ -67,6 +67,17 @@ launchIt = (input) ->
 
 
 $(document).ready ->
+  $("#to-change").fadeOut('slow', ->
+    $(this).html(
+      "
+      <div class='input-append'>
+        <input class='span2' id='appendedInputButton' type='text'>
+        <button class='btn btn-primary' type='button'>Solve!</button>
+      </div>
+      "
+    ).fadeIn('slow')
+  )
+
   $('.btn').click ->
     $('#fill1').html ''
     $('#fill2').html ''
