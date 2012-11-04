@@ -35,9 +35,6 @@
   display: block;
   width: 100%;
   min-height: 30px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .hidden {
@@ -208,9 +205,6 @@
     min-height: 30px;
     margin-left: 2.564102564102564%;
     *margin-left: 2.5109110747408616%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
   }
   .row-fluid [class*="span"]:first-child {
     margin-left: 0;
@@ -558,9 +552,6 @@
     min-height: 30px;
     margin-left: 2.7624309392265194%;
     *margin-left: 2.709239449864817%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
   }
   .row-fluid [class*="span"]:first-child {
     margin-left: 0;
@@ -826,16 +817,10 @@
     float: none;
     width: 100%;
     margin-left: 0;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
   }
   .span12,
   .row-fluid .span12 {
     width: 100%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
   }
   .row-fluid [class*="offset"]:first-child {
     margin-left: 0;
@@ -850,9 +835,6 @@
     display: block;
     width: 100%;
     min-height: 30px;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
   }
   .input-prepend input,
   .input-append input,
