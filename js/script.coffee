@@ -76,13 +76,14 @@ $(document).ready ->
       </div>
       "
     ).fadeIn('slow')
+
+    $('.btn').click ->
+      console.log 'cloicked'
+      $('#fill1').html ''
+      $('#fill2').html ''
+      $('#fill3').html ''
+
+      input = $('#appendedInputButton').val().toLowerCase().replace(/\ /g,"")
+      launchIt input
+
   )
-
-  $('.btn').click ->
-    $('#fill1').html ''
-    $('#fill2').html ''
-    $('#fill3').html ''
-
-    input = $('#appendedInputButton').val().toLowerCase().replace(/\ /g,"")
-    console.log input
-    launchIt input
