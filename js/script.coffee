@@ -271425,10 +271425,17 @@ clearGlobals = (callback) ->
   callback()
 
 fillDOM = ->
-  resultCount = window.results.length()
+  resultCount = window.results.length
+  fillOneCount = Math.floor( resultCount / 3 )
+  fillThreeCount = resultCount - ( 2 * fillOneCount )
 
-  for word in window.results
-    $('#fill1').append "<h4>#{word}</h4>"
+  for word, i in window.results
+    if i < fillOneCount
+      $('#fill1').append "<h4>#{word}</h4>"
+    else if i < 2*fillOneCount
+      $('#fill2').append "<h4>#{word}</h4>"
+    else
+      $('#fill3').append "<h4>#{word}</h4>"
 
 launchIt = (input) ->
   clearGlobals ->
